@@ -1,11 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Valve.VR;
 
 [RequireComponent (typeof(MeshFilter))]
 public class ExtrudedMeshTrail : MonoBehaviour
 {
-	public Transform controllerTransform;
-
 	class ExtrudedTrailSection
 	{
 		public Vector3 point;
@@ -31,10 +30,8 @@ public class ExtrudedMeshTrail : MonoBehaviour
 
 	void Update ()
 	{
-		transform.position = controllerTransform.position;
-		transform.rotation = controllerTransform.rotation;
 		Vector3 position = transform.position;
-		Vector3 scale = transform.localScale;
+		Vector3 scale = transform.lossyScale;
 		float now = Time.time;
 	
 		// Remove old sections
