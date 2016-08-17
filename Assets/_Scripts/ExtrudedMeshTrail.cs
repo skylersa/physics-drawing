@@ -21,15 +21,13 @@ public class ExtrudedMeshTrail : MonoBehaviour
 	bool invertFaces = false;
 	private Mesh srcMesh;
 	private MeshExtrusion.Edge[] precomputedEdges;
-
+	private List<ExtrudedTrailSection> sections = new List<ExtrudedTrailSection> ();
 
 	void Start ()
 	{
 		srcMesh = GetComponent <MeshFilter> ().sharedMesh;
 		precomputedEdges = MeshExtrusion.BuildManifoldEdges (srcMesh);
 	}
-
-	private List<ExtrudedTrailSection> sections = new List<ExtrudedTrailSection> ();
 
 	void Update ()
 	{
