@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Valve.VR;
 
 [RequireComponent (typeof(MeshFilter))]
-public class ExtrudedMeshTrail : MonoBehaviour
+public class ExtrudedMeshController : MonoBehaviour
 {
 	class ExtrudedTrailSection
 	{
