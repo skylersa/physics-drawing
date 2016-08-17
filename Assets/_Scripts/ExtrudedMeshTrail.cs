@@ -1,10 +1,7 @@
 using UnityEngine;
-
-
-//@script RequireComponent (MeshFilter)
 using System.Collections.Generic;
 
-
+[RequireComponent (typeof(MeshFilter))]
 public class ExtrudedMeshTrail : MonoBehaviour
 {
 	public Transform controllerTransform;
