@@ -108,5 +108,6 @@ public class ExtrudedMeshController : MonoBehaviour
 	public void StopExtrusion ()
 	{
 		extrude = false;
+		enabled = false;
 	}
 }
