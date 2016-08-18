@@ -8,6 +8,6 @@ PhysicMaterial:
   m_Name: Trail Physic Material
   dynamicFriction: 0.6
   staticFriction: 0.6
-  bounciness: 0.99
+  bounciness: 0.95
   frictionCombine: 0
   bounceCombine: 0

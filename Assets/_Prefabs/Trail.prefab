@@ -22,8 +22,8 @@ GameObject:
   - 33: {fileID: 33000013591121286}
   - 23: {fileID: 23000012629720084}
   - 114: {fileID: 114000011506035320}
-  - 135: {fileID: 135000011465216568}
   - 54: {fileID: 54000013619801462}
+  - 135: {fileID: 135000011862517622}
   m_Layer: 0
   m_Name: Trail
   m_TagString: Untagged
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945c76d512717f04db7b9c25a01e4369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135000011465216568
+--- !u!135 &135000011862517622
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -116,5 +116,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
