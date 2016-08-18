@@ -3,13 +3,29 @@ using System.Collections;
 
 public class WandController : MonoBehaviour
 {
+	public Transform trailHolder;
+	public GameObject trailPrefab;
 
 	SteamVR_TrackedController trackedController;
 	SteamVR_TrackedObject trackedObject;
 	SteamVR_RenderModel renderModel;
+	Transform trail;
+
+	ExtrudedMeshController extrudedMeshController;
+
+	void Update ()
+	{
+		trail.position = trailHolder.transform.position;
+		trail.rotation = trailHolder.transform.rotation;
+	}
 
 	public void Init (int index)
 	{
+		trail = Instantiate (trailPrefab).transform;
+		extrudedMeshController = trail.GetComponent<ExtrudedMeshController> ();
+		trail.localScale = trailHolder.lossyScale;
+		trail.name = trailPrefab.name + " " + name;
+
 		trackedObject = gameObject.AddComponent<SteamVR_TrackedObject> ();
 		trackedObject.SetDeviceIndex (index);
 		
@@ -29,11 +45,11 @@ public class WandController : MonoBehaviour
 
 	void OnTriggerClicked (object sender, ClickedEventArgs e)
 	{
-		throw new System.NotImplementedException ();
+		extrudedMeshController.StartExtrusion ();
 	}
 
 	void OnTriggerUnclicked (object sender, ClickedEventArgs e)
 	{
-		throw new System.NotImplementedException ();
+		extrudedMeshController.StopExtrusion ();
 	}
 }

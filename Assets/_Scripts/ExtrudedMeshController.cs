@@ -18,6 +18,8 @@ public class ExtrudedMeshController : MonoBehaviour
 	bool autoCalculateOrientation = true;
 	float minDistance = .01f;
 	bool invertFaces = false;
+	bool extrude;
+
 	private Mesh srcMesh;
 	private MeshExtrusion.Edge[] precomputedEdges;
 	private List<ExtrudedTrailSection> sections = new List<ExtrudedTrailSection> ();
@@ -35,17 +37,19 @@ public class ExtrudedMeshController : MonoBehaviour
 		float now = Time.time;
 	
 		// Remove old sections
-		while (sections.Count > 0 && now > sections [sections.Count - 1].time + time) {
+		while (sections.Count > 1000 && now > sections [sections.Count - 1].time + time) {
 			sections.RemoveAt (sections.Count - 1);
 		}
 
-		// Add a new trail section to beginning of array
-		if (sections.Count == 0 || (sections [0].point - position).sqrMagnitude > minDistance * minDistance) {
-			ExtrudedTrailSection section = new ExtrudedTrailSection ();
-			section.point = position;
-			section.matrix = transform.localToWorldMatrix;
-			section.time = now;
-			sections.Insert (0, section);
+		if (extrude) {
+			// Add a new trail section to beginning of array
+			if (sections.Count == 0 || (sections [0].point - position).sqrMagnitude > minDistance * minDistance) {
+				ExtrudedTrailSection section = new ExtrudedTrailSection ();
+				section.point = position;
+				section.matrix = transform.localToWorldMatrix;
+				section.time = now;
+				sections.Insert (0, section);
+			}
 		}
 	
 		// We need at least 2 sections to create the line
@@ -96,4 +100,13 @@ public class ExtrudedMeshController : MonoBehaviour
 		MeshExtrusion.ExtrudeMesh (srcMesh, GetComponent <MeshFilter> ().mesh, finalSections, precomputedEdges, invertFaces);
 	}
 
+	public void StartExtrusion ()
+	{
+		extrude = true;
+	}
+
+	public void StopExtrusion ()
+	{
+		extrude = false;
+	}
 }
