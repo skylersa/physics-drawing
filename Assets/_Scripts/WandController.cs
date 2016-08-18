@@ -12,6 +12,7 @@ public class WandController : MonoBehaviour
 	Transform trail;
 
 	ExtrudedMeshController extrudedMeshController;
+	Transform trailContainer;
 
 	void Update ()
 	{
@@ -21,7 +22,8 @@ public class WandController : MonoBehaviour
 
 	public void Init (int index)
 	{
-		NewTrail ();
+		trailContainer = new GameObject ().transform;
+		trailContainer.name = name + " Trail Container";
 
 		trackedObject = gameObject.AddComponent<SteamVR_TrackedObject> ();
 		trackedObject.SetDeviceIndex (index);
@@ -38,14 +40,18 @@ public class WandController : MonoBehaviour
 		
 		trackedController.TriggerClicked += OnTriggerClicked;
 		trackedController.TriggerUnclicked += OnTriggerUnclicked;
+
+		NewTrail ();
 	}
 
 	void NewTrail ()
 	{
 		trail = Instantiate (trailPrefab).transform;
+		trail.SetParent (trailContainer, true);
 		extrudedMeshController = trail.GetComponent<ExtrudedMeshController> ();
 		trail.localScale = trailHolder.lossyScale;
 		trail.name = trailPrefab.name + " " + name;
+		trail.GetComponentInChildren<Collider> ().enabled = false;
 	}
 
 	void OnTriggerClicked (object sender, ClickedEventArgs e)
@@ -56,6 +62,9 @@ public class WandController : MonoBehaviour
 	void OnTriggerUnclicked (object sender, ClickedEventArgs e)
 	{
 		extrudedMeshController.StopExtrusion ();
+		trail.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		trail.GetComponent<Rigidbody> ().rotation = Quaternion.identity;
+		trail.GetComponentInChildren<Collider> ().enabled = true;
 		NewTrail ();
 	}
 }

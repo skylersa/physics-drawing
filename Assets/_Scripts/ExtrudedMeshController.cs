@@ -98,6 +98,10 @@ public class ExtrudedMeshController : MonoBehaviour
 	
 		// Rebuild the extrusion mesh	
 		MeshExtrusion.ExtrudeMesh (srcMesh, GetComponent <MeshFilter> ().mesh, finalSections, precomputedEdges, invertFaces);
+
+		if (extrude == false && sections.Count > 0) {
+			enabled = false;
+		}
 	}
 
 	public void StartExtrusion ()
@@ -108,6 +112,5 @@ public class ExtrudedMeshController : MonoBehaviour
 	public void StopExtrusion ()
 	{
 		extrude = false;
-		enabled = false;
 	}
 }
