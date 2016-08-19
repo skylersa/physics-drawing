@@ -20,6 +20,11 @@ public class WandController : MonoBehaviour
 		trail.rotation = trailHolder.transform.rotation;
 	}
 
+	void OnDestroy ()
+	{
+		Destroy (trailContainer.gameObject);
+	}
+
 	public void Init (int index)
 	{
 		trailContainer = new GameObject ().transform;

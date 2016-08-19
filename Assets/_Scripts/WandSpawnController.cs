@@ -21,12 +21,16 @@ public class WandSpawnController : MonoBehaviour
 			return;
 		}
 		Debug.Log (name + ": OnDeviceConnected" + args [0] + " " + args [1]);
+		string wandName = wandPrefab.name = "Wand" + index;
 		if (activate) {
 			GameObject wand = Instantiate (wandPrefab);
-			wand.name = "Wand" + index;
+			wand.name = wandName;
 			wand.transform.SetParent (transform, false);
 			WandController wandController = wand.GetComponentInChildren<WandController> ();
 			wandController.Init (index);
+		} else {
+			GameObject wand = GameObject.Find (wandName);
+			Destroy (wand);
 		}
 	}
 
