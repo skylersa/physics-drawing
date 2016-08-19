@@ -63,7 +63,7 @@ public class WandController : MonoBehaviour
 	{
 		extrudedMeshController.StopExtrusion ();
 		trail.GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		trail.GetComponent<Rigidbody> ().rotation = Quaternion.identity;
+		trail.GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
 		trail.GetComponentInChildren<Collider> ().enabled = true;
 		NewTrail ();
 	}
