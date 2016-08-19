@@ -20,7 +20,7 @@ public class WandSpawnController : MonoBehaviour
 		if (SteamVR.instance.hmd.GetTrackedDeviceClass ((uint)index) != ETrackedDeviceClass.Controller) {
 			return;
 		}
-		Debug.Log (name + ": OnDeviceConnected" + args [0] + " " + args [1]);
+//		Debug.Log (name + ": OnDeviceConnected" + args [0] + " " + args [1]);
 		string wandName = wandPrefab.name = "Wand" + index;
 		if (activate) {
 			GameObject wand = Instantiate (wandPrefab);
