@@ -13,6 +13,7 @@ public class WandController : MonoBehaviour
 
 	ExtrudedMeshController extrudedMeshController;
 	Transform trailContainer;
+	int index;
 
 	void Update ()
 	{
@@ -22,11 +23,14 @@ public class WandController : MonoBehaviour
 
 	void OnDestroy ()
 	{
-		Destroy (trailContainer.gameObject);
+		if (trailContainer != null) {
+			Destroy (trailContainer.gameObject);
+		}
 	}
 
 	public void Init (int index)
 	{
+		this.index = index;
 		trailContainer = new GameObject ().transform;
 		trailContainer.name = name + " Trail Container";
 
@@ -55,8 +59,7 @@ public class WandController : MonoBehaviour
 		trail.SetParent (trailContainer, true);
 		extrudedMeshController = trail.GetComponent<ExtrudedMeshController> ();
 		trail.localScale = trailHolder.lossyScale;
-		trail.name = trailPrefab.name + " " + name;
-		trail.GetComponentInChildren<Collider> ().enabled = false;
+		trail.name = trailPrefab.name + " " + index;
 	}
 
 	void OnTriggerClicked (object sender, ClickedEventArgs e)

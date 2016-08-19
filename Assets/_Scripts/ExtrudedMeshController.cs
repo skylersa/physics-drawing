@@ -12,6 +12,8 @@ public class ExtrudedMeshController : MonoBehaviour
 		public float time;
 	}
 
+	public PhysicMaterial physicMaterial;
+
 	// Generates an extrusion trail from the attached mesh
 	// Uses the MeshExtrusion algorithm in MeshExtrusion.cs to generate and preprocess the mesh.
 	float time = 2f;
@@ -112,8 +114,28 @@ public class ExtrudedMeshController : MonoBehaviour
 	public void StopExtrusion ()
 	{
 		extrude = false;
-		GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
-		GetComponentInChildren<Collider> ().enabled = true;
+		Vector3 min = sections [0].point;
+		Vector3 max = sections [0].point;
+		for (var i = 0; i < sections.Count; i++) {
+			Vector3 point = sections [i].point;
+			min.x = Mathf.Min (min.x, point.x);
+			min.y = Mathf.Min (min.y, point.y);
+			min.z = Mathf.Min (min.z, point.z);
+
+			max.x = Mathf.Max (max.x, point.x);
+			max.y = Mathf.Max (max.y, point.y);
+			max.z = Mathf.Max (max.z, point.z);
+		}
+		Transform sphere = GameObject.CreatePrimitive (PrimitiveType.Sphere).transform;
+		sphere.SetParent (transform.parent, false);
+		sphere.localPosition = .5f * (min + max);
+		sphere.localScale = (max - min);
+		sphere.rotation = transform.parent.transform.rotation;
+		Rigidbody rb = sphere.gameObject.AddComponent<Rigidbody> ();
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = Vector3.zero;
+		sphere.GetComponent<SphereCollider> ().material = physicMaterial;
+
+		transform.SetParent (sphere, true);
 	}
 }

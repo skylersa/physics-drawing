@@ -53,7 +53,7 @@ GameObject:
   - 4: {fileID: 4000014269026460}
   - 114: {fileID: 114000012649425878}
   m_Layer: 0
-  m_Name: Wand
+  m_Name: Wand2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
