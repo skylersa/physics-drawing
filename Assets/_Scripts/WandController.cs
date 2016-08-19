@@ -67,9 +67,6 @@ public class WandController : MonoBehaviour
 	void OnTriggerUnclicked (object sender, ClickedEventArgs e)
 	{
 		extrudedMeshController.StopExtrusion ();
-		trail.GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		trail.GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
-		trail.GetComponentInChildren<Collider> ().enabled = true;
 		NewTrail ();
 	}
 }

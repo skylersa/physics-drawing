@@ -112,5 +112,8 @@ public class ExtrudedMeshController : MonoBehaviour
 	public void StopExtrusion ()
 	{
 		extrude = false;
+		GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
+		GetComponentInChildren<Collider> ().enabled = true;
 	}
 }
